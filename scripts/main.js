@@ -5,25 +5,16 @@ function computerPlay() {
     return moves[computerSelection];
 }
 
-function humanPlay() {
-    let playerSelection = prompt('Choose Rock, Paper, or Scissors');
-    playerSelection = playerSelection.toLowerCase();
-    while(!(playerSelection == 'rock' || playerSelection == 'paper' || playerSelection == 'scissors')){
-        playerSelection = prompt('Please enter a valid move(Rock, Paper, Scissors)');
-    }
-    return playerSelection;
-}
-
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
-    let msg;
+    let msg = '';
 
     if(playerSelection == 'rock'){
         if(computerSelection == 'paper'){
             msg = 'You Lose! Paper beats Rock';
         }
-        else if(computerSelection == 'rock'){
+        else if(computerSelection == 'scissors'){
             msg = 'You Win! Rock beats Scissors';
         }
         else{
@@ -44,7 +35,7 @@ function playRound(playerSelection, computerSelection) {
             msg = 'You Lose! Rock beats Scissors';
         }
         else if(computerSelection == 'paper'){
-            msg = 'You win! Scissors beats Paper';
+            msg = 'You Win! Scissors beats Paper';
         }
         else{
             msg = 'It\'s a Draw';
@@ -53,29 +44,41 @@ function playRound(playerSelection, computerSelection) {
     return msg;
 }
 
-function getMessage(result, humanPoints, computerPoints){
-    result = `${result} \nPlayer Score: ${humanPoints}\nComputer Score: ${computerPoints}`
-    return result
-}
+const div = document.querySelector('div');
 
-function game() {
-    let humanPoints = 0;
-    let computerPoints = 0;
-    
-    for(let i = 0; i < 5; i++){
-        const playerSelection = humanPlay();
-        const computerSelection = computerPlay();
+let playerScore = document.querySelector('#player-score');
+let computerScore = document.querySelector('#computer-score');
 
-        const result = playRound(playerSelection, computerSelection);
+playerScore.textContent = 0;
+computerScore.textContent = 0;
 
-        if(result.indexOf('Lose') > -1){
-            computerPoints++;
-        } else if(result.indexOf('Win') > -1){
-            humanPoints++;
-        }
+const announcement = document.createElement('p');
+div.appendChild(announcement);
 
-        console.log(getMessage(result, humanPoints, computerPoints));
+const buttons = Array.from(document.querySelectorAll('button'));
+buttons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+       const msg = playRound(button.innerHTML, computerPlay());
+       if(msg.indexOf('Win') > -1){
+           playerScore.textContent++;
+           winner(playerScore.textContent, 'Player');
+       } else if(msg.indexOf('Lose') > -1){
+           computerScore.textContent++;
+           winner(computerScore.textContent, 'Computer');
+       }
+    });
+});
+
+function winner(currentScore, player) {
+    if(currentScore == 5){
+        announcement.textContent = `${player} wins! Choose a move to play again.`;
+        resetScore();
+    } else{
+        announcement.textContent = '';
     }
 }
 
-game();
+function resetScore() {
+    playerScore.textContent = 0;
+    computerScore.textContent = 0;
+}
