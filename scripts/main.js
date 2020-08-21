@@ -1,4 +1,4 @@
-moves = ['Rock', 'Paper', 'Scissors'];
+moves = ['rock', 'raper', 'scissors'];
 
 function computerPlay() {
     let computerSelection = Math.floor(Math.random()*3);
@@ -6,8 +6,6 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
     let msg = '';
 
     if(playerSelection == 'rock'){
@@ -44,41 +42,21 @@ function playRound(playerSelection, computerSelection) {
     return msg;
 }
 
-const div = document.querySelector('div');
-
-let playerScore = document.querySelector('#player-score');
-let computerScore = document.querySelector('#computer-score');
-
-playerScore.textContent = 0;
-computerScore.textContent = 0;
-
-const announcement = document.createElement('p');
-div.appendChild(announcement);
-
-const buttons = Array.from(document.querySelectorAll('button'));
+const buttons = Array.from(document.querySelectorAll('img'));
 buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-       const msg = playRound(button.innerHTML, computerPlay());
-       if(msg.indexOf('Win') > -1){
-           playerScore.textContent++;
-           winner(playerScore.textContent, 'Player');
-       } else if(msg.indexOf('Lose') > -1){
-           computerScore.textContent++;
-           winner(computerScore.textContent, 'Computer');
-       }
-    });
+    button.addEventListener('click', game());
 });
+
+function game(e);{
+
+}
 
 function winner(currentScore, player) {
     if(currentScore == 5){
-        announcement.textContent = `${player} wins! Choose a move to play again.`;
-        resetScore();
     } else{
-        announcement.textContent = '';
     }
 }
 
 function resetScore() {
-    playerScore.textContent = 0;
-    computerScore.textContent = 0;
+
 }

@@ -1,0 +1,40 @@
+html {
+    font-size: 10px;
+}
+
+body {
+    background-color: #b2ebf2;
+}
+
+#moves {
+    width: 500px;
+    margin: 50px auto 0px;
+}
+
+#moves img {
+    width: 90px;
+    background-color: white;
+    padding: 20px;
+    margin: 20px 17px 0;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+#display {
+    width: 500px;
+    height: 300px;
+    margin: 20px auto;
+    border-radius: 30px;
+}
+
+#start {
+    font-size: 10rem;
+    width: 250px;
+    margin: auto;
+    position: relative;
+    top: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+}
