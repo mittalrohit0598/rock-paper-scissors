@@ -55,6 +55,7 @@ start.addEventListener('click', () => {
     }
     
     start.textContent = "";
+    start.style.width = '0';
     
     display.setAttribute('style', 'background-color: #fff; display: flex;');
 
@@ -122,10 +123,11 @@ function game(button){
 function winner(currentScore, player) {
     if(currentScore == 5 && player == 'you'){
         document.querySelector('#message').textContent = `You Win this round by ${playerScore} - ${computerScore}`;
-        document.querySelector('#message').setAttribute('style', 'color: #00bcd4; position: relative; top: -250px; background-color: #fff; width: 500px; margin: 0 auto; border-radius: 30px');
+        document.querySelector('#message').setAttribute('style', 'color: #00bcd4; position: relative; top: -250px; background-color: #fff; width: 500px; margin: 0 auto; border-radius: 30px; padding: 10px;');
         document.querySelector('#player').remove();
         document.querySelector('#computer').remove();
         start.textContent = 'Play Again';
+        start.style.width = '500px';
         display.style.backgroundColor = '';
 
     } else if(currentScore == 5 && player == 'computer'){
@@ -134,6 +136,7 @@ function winner(currentScore, player) {
         document.querySelector('#computer').remove();
         document.querySelector('#player').remove();
         start.textContent = 'Play Again';
+        start.style.width = '500px';
         display.style.backgroundColor = '';
     }
 }
